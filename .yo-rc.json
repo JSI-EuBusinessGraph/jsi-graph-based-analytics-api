@@ -5,7 +5,7 @@
     "name": "JSI GraphBasedAnalytics",
     "repo": "JSI-EuBusinessGraph/jsi-graph-based-analytics-api",
     "splitSpec": false,
-    "samples": false,
+    "samples": true,
     "installSwaggerUI": true
   }
 }

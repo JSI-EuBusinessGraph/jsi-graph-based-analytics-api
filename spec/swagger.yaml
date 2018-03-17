@@ -13,7 +13,7 @@ paths:
   /extractRelations:
     post:
       summary: Extract relations from a given text
-      description: 'Extract relations from a given text.'
+      description: Extract relations from a given text.
       operationId: extractRelations
       consumes:
         - application/json
@@ -25,10 +25,10 @@ paths:
           description: Text and expected relation info
           required: true
           schema:
-            type: object
+            $ref: '#/definitions/extractRelationsInput'
       responses:
         '200':
-          description: successful operation
+          description: OK
   /getEntityLabelInfo:
     get:
       summary: Get data associated with an entity label
@@ -45,11 +45,11 @@ paths:
             type: object
       responses:
         '200':
-          description: successful operation
+          description: OK
   /getEntityNews:
     get:
       summary: Search EventRegistry news by Entity URI
-      description: 'Search EventRegistry news by Entity URI.'
+      description: Search EventRegistry news by Entity URI.
       operationId: getEntityNews
       produces:
         - application/json
@@ -62,11 +62,11 @@ paths:
             type: object
       responses:
         '200':
-          description: successful operation
+          description: OK
   /getEntityRelations:
     get:
       summary: Get relation instances including this Entity URI
-      description: 'Get relation instances including this Entity URI.'
+      description: Get relation instances including this Entity URI.
       operationId: getEntityRelations
       produces:
         - application/json
@@ -80,3 +80,34 @@ paths:
       responses:
         '200':
           description: successful operation
+definitions:
+  extractRelationsInput:
+    type: object
+    properties:
+      text:
+        type: string
+        description: Document text to detect relations from
+        example: >-
+          Google is buying part of HTC smartphone team for $1.1 billion
+      documentInfo:
+        type: object
+        description: Document source information, including this object commits results of this operation to the database
+        properties:
+          uri:
+            type: string
+            description: Document URI in the source corpus
+            example: >-
+              https://thenextweb.com/contributors/2018/03/17/facebook-will-carry-health-warning-within-five-years/
+          canonicalUrl:
+            type: string
+            description: URL of document resource
+            example: >-
+              833343475
+          sourceName:
+            type: string
+            description: Document source name
+            example: Event Registry
+        required: 
+          - uri
+    required:
+      - text
