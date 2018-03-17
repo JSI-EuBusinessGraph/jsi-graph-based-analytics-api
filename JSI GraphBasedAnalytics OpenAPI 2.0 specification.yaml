@@ -23,7 +23,6 @@ paths:
         - in: body
           name: body
           description: Text and expected relation info
-          required: true
           schema:
             $ref: '#/definitions/extractRelationsInput'
       responses:
@@ -40,7 +39,6 @@ paths:
         - in: body
           name: body
           description: Entity info
-          required: true
           schema:
             type: object
       responses:
@@ -57,7 +55,6 @@ paths:
         - in: body
           name: body
           description: Entity info
-          required: true
           schema:
             type: object
       responses:
@@ -74,7 +71,6 @@ paths:
         - in: body
           name: body
           description: Entity info
-          required: true
           schema:
             type: object
       responses:
@@ -107,7 +103,3 @@ definitions:
             type: string
             description: Document source name
             example: Event Registry
-        required: 
-          - uri
-    required:
-      - text
