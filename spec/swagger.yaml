@@ -22,6 +22,7 @@ paths:
       parameters:
         - in: body
           name: body
+          required: true
           description: Text and expected relation info
           schema:
             $ref: '#/definitions/extractRelationsInput'
@@ -36,6 +37,13 @@ definitions:
         type: string
         description: Document text to detect relations from
         example: 'Google is buying part of HTC smartphone team for $1.1 billion'
+      types:
+        type: array
+        items:
+          type: string
+          description: Relation label
+          example: "acquisition"
+        description: 'An array of relations to detect; empty defaults to detecting all available relations'
       documentInfo:
         type: object
         description: 'Document source information, including this object commits results of this operation to the database'
@@ -52,3 +60,9 @@ definitions:
             type: string
             description: Document source name
             example: Event Registry
+        required:
+          - uri
+        additionalProperties: false
+    required:
+      - text
+    additionalProperties: false
