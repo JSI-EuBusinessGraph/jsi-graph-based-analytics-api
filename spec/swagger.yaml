@@ -95,7 +95,6 @@ definitions:
         type: string
         description: Entity label text
         example: Google
-        required: true
       relationTypes:
         type: array
         items:
@@ -104,3 +103,5 @@ definitions:
           example: acquisition
         description: >-
           An array of relation types to return for the given label; empty defaults to detecting all available relation types
+    required:
+      - entityLabel
