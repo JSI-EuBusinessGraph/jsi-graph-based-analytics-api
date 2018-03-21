@@ -32,7 +32,7 @@ paths:
   /getRelations:
     post:
       summary: Get relations of a given type for a given entity label
-      description: Get relations extracted and saved in the database
+      description: Get relations extracted and saved in the database.
       operationId: getRelations
       consumes:
         - application/json
