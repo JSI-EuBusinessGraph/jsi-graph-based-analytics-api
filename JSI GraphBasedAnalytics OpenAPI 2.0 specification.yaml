@@ -1,19 +1,19 @@
 swagger: '2.0'
 info:
-  description: 'Graph based analytics API developed by JSI.'
-  version: '1.0.0'
+  description: Graph based analytics API developed by JSI.
+  version: 1.0.0
   title: JSI Graph Based Analytics
   contact:
-    email: 'miha.jenko@ijs.si'
-host: 'gba.ijs.si'
-basePath: '/api/v1'
+    email: miha.jenko@ijs.si
+host: gba.ijs.si
+basePath: /api/v1
 schemes:
   - http
 paths:
   /extractRelations:
     post:
       summary: Extract relations from a given text
-      description: 'Extract relations from a given text.'
+      description: Extract relations from a given text.
       operationId: extractRelations
       consumes:
         - application/json
@@ -27,7 +27,26 @@ paths:
           schema:
             $ref: '#/definitions/extractRelationsInput'
       responses:
-        200:
+        '200':
+          description: OK
+  /getRelations:
+    post:
+      summary: Get relations of a given type for a given entity label
+      description: Get relations extracted and saved in the database
+      operationId: getRelations
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: Entity label and relation types
+          schema:
+            $ref: '#/definitions/getRelationsInput'
+      responses:
+        '200':
           description: OK
 definitions:
   extractRelationsInput:
@@ -36,22 +55,25 @@ definitions:
       text:
         type: string
         description: Document text to detect relations from
-        example: 'Google is buying part of HTC smartphone team for $1.1 billion'
+        example: Google is buying part of HTC smartphone team for $1.1 billion
       types:
         type: array
         items:
           type: string
-          description: Relation label
-          example: "acquisition"
-        description: 'An array of relations to detect; empty defaults to detecting all available relations'
+          description: Relation type label
+          example: acquisition
+        description: >-
+          An array of relation types to detect; empty defaults to detecting all available relation types
       documentInfo:
         type: object
-        description: 'Document source information, including this object commits results of this operation to the database'
+        description: >-
+          Document source information, including this object commits results of this operation to the database
         properties:
           uri:
             type: string
             description: Document URI in the source corpus
-            example: 'https://thenextweb.com/contributors/2018/03/17/facebook-will-carry-health-warning-within-five-years/'
+            example: >-
+              https://thenextweb.com/contributors/2018/03/17/facebook-will-carry-health-warning-within-five-years/
           canonicalUrl:
             type: string
             description: URL of document resource
@@ -66,3 +88,18 @@ definitions:
     required:
       - text
     additionalProperties: false
+  getRelationsInput:
+    type: object
+    properties:
+      entityLabel:
+        type: string
+        description: Entity label text
+        example: Google
+      relationTypes:
+        type: array
+        items:
+          type: string
+          description: Relation type label
+          example: acquisition
+        description: >- 
+          An array of relation types to return for the given label; empty defaults to detecting all available relation types
