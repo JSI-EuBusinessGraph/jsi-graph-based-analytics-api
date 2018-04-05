@@ -72,12 +72,12 @@ definitions:
           uri:
             type: string
             description: Document URI in the source corpus
-            example: >-
-              https://thenextweb.com/contributors/2018/03/17/facebook-will-carry-health-warning-within-five-years/
+            example: '833343475'
           canonicalUrl:
             type: string
             description: URL of document resource
-            example: '833343475'
+            example: >-
+              https://thenextweb.com/contributors/2018/03/17/facebook-will-carry-health-warning-within-five-years/
           sourceName:
             type: string
             description: Document source name
