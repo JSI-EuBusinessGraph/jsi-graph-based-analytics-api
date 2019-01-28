@@ -13,7 +13,8 @@ paths:
   /getEventTypeLabels:
     get:
       summary: Get available event type labels
-      description: Get available event type labels, which can then be used as input to `/extractEventTypes`
+      description: >-
+        Get available event type labels, which can then be used as input to `/extractEventTypes`
       operationId: getEventTypeLabels
       produces:
         - application/json
@@ -25,7 +26,8 @@ paths:
   /extractEventTypes:
     post:
       summary: Extract event types
-      description: Categorize text sentences into predefined event types. If the `documentInfo` object is provided, the call will save extracted events to a database.
+      description: >-
+        Categorize text sentences into predefined event types. If the `documentInfo` object is provided, the call will save extracted events to a database.
       operationId: extractEventTypes
       consumes:
         - application/json
@@ -108,7 +110,8 @@ paths:
               https://thenextweb.com/contributors/2018/03/17/facebook-will-carry-health-warning-within-five-years/
           datetimePublished:
             type: string
-            description: Document publish datetime. Required format: YYYY-MM-DDTHH:MM:SS
+            description: >-
+              Document publish datetime. Required format: YYYY-MM-DDTHH:MM:SS
             example: '2012-12-01T12:05:00'
         required:
           - uri
