@@ -6,7 +6,7 @@ info:
   contact:
     email: miha.jenko@ijs.si
 host: gba.ijs.si
-basePath: /api/v1
+basePath: /api/v1/
 schemes:
   - http
 paths:
@@ -72,6 +72,7 @@ paths:
           description: Bad input
         '503':
           description: Service unavailable, usually due to request flooding
+definitions:
   extractEventTypesInput:
     type: object
     properties:
