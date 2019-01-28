@@ -1,0 +1,143 @@
+swagger: '2.0'
+info:
+  description: Graph based analytics API developed by JSI.
+  version: 1.0.0
+  title: JSI Graph Based Analytics
+  contact:
+    email: miha.jenko@ijs.si
+host: gba.ijs.si
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /getEventTypeLabels:
+    get:
+      summary: Get available event type labels
+      description: Get available event type labels, which can then be used as input to `/extractEventTypes`
+      operationId: getEventTypeLabels
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+        '503':
+          description: Service unavailable, usually due to request flooding
+  /extractEventTypes:
+    post:
+      summary: Extract event types
+      description: Categorize text sentences into predefined event types. If the `documentInfo` object is provided, the call will save extracted events to a database.
+      operationId: extractEventTypes
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/extractEventTypesInput'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Microservice failure
+        '400':
+          description: Bad input
+        '503':
+          description: Service unavailable, usually due to request flooding
+  /getMentions:
+    post:
+      summary: Get mention object for an entity label
+      description: Retrieve saved entity mentions from a database for a given entity label.
+      operationId: getMentions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/getMentionsInput'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Microservice failure
+        '400':
+          description: Bad input
+        '503':
+          description: Service unavailable, usually due to request flooding
+  extractEventTypesInput:
+    type: object
+    properties:
+      text:
+        type: string
+        description: Document text from which to extract event type instances
+        example: >-
+          Google is buying part of HTC smartphone team for $1.1 billion. Bizness Apps, the leading mobile application development platform, today announced that it has partnered with AppGlobal to expand its global presence to Russia and CIS.
+      eventTypes:
+        type: array
+        description: >-
+          An array of event type labels to extract; empty defaults to detecting all available event types
+        items:
+          type: string
+          description: Event type label
+          example: acquisition
+      apiKey:
+        $ref: '#/definitions/apiKeyModel'
+      documentInfo:
+        type: object
+        description: >-
+          Document source metadata. Providing this object with the `uri` value commits event types extracted for Organisation and Person labels to a database. User must provide a valid `apiKey` for this to work.
+        properties:
+          uri:
+            type: string
+            description: Document URI in the source corpus
+            example: 'eng-833343475'
+          sourceUri:
+            type: string
+            description: Source URI
+            example: 'www.eventregistry.org'
+          canonicalUrl:
+            type: string
+            description: Document URL
+            example: >-
+              https://thenextweb.com/contributors/2018/03/17/facebook-will-carry-health-warning-within-five-years/
+          datetimePublished:
+            type: string
+            description: Document publish datetime. Required format: YYYY-MM-DDTHH:MM:SS
+            example: '2012-12-01T12:05:00'
+        required:
+          - uri
+          - sourceUri
+        additionalProperties: false
+    required:
+      - text
+    additionalProperties: false
+  getMentionsInput:
+    type: object
+    properties:
+      apiKey:
+        $ref: '#/definitions/apiKeyModel'
+      label:
+        type: string
+        description: Entity label text
+        example: Google
+      eventTypes:
+        type: array
+        items:
+          type: string
+          description: Event type label
+          example: business+acquisitions-mergers
+        description: >-
+          An array of event type labels to retrieve; empty defaults to retrieving all available event types for a label
+    required:
+      - apiKey
+      - label
+  apiKeyModel:
+    type: string
+    description: Registered API key
+    example: '1c5220e4-e890-4682-8737-c54f208510c3'
