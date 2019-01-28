@@ -84,11 +84,11 @@ definitions:
       eventTypes:
         type: array
         description: >-
-          An array of event type labels to extract; empty defaults to detecting all available event types
+          An array of event type labels to extract; empty or omitted defaults to detecting all available event types
         items:
           type: string
           description: Event type label
-          example: acquisition
+          example: 'business+acquisitions-mergers'
       apiKey:
         $ref: '#/definitions/apiKeyModel'
       documentInfo:
