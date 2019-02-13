@@ -7,7 +7,6 @@ JSI Graph Based Analytics API documentation repository.
 ## Links
 
 - Documentation: https://jsi-eubusinessgraph.github.io/jsi-graph-based-analytics-api/
-- SwaggerUI: https://jsi-eubusinessgraph.github.io/jsi-graph-based-analytics-api/swagger-ui/
 - Look full spec:
     + JSON https://jsi-eubusinessgraph.github.io/jsi-graph-based-analytics-api/swagger.json
     + YAML https://jsi-eubusinessgraph.github.io/jsi-graph-based-analytics-api/swagger.yaml
