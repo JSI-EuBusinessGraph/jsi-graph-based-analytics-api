@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   title: JSI Graph Based Analytics
   contact:
-    email: miha.jenko@ijs.si
+    email: inna.novalija@ijs.si
 host: gba.ijs.si
 basePath: /api/v1/
 schemes:
