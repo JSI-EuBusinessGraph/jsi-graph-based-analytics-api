@@ -1,0 +1,11 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": true,
+    "importedSpec": "JSI GraphBasedAnalytics OpenAPI 2.0 specification.yaml",
+    "name": "JSI Graph Based Analytics",
+    "repo": "JSI-EuBusinessGraph/jsi-graph-based-analytics-api",
+    "splitSpec": false,
+    "samples": true,
+    "installSwaggerUI": false
+  }
+}
